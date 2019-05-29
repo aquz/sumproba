@@ -23,7 +23,7 @@ const transporter = nodeMailer.createTransport({
 
 const baza_danych = mongoose.model('sum_baza', nameSchema)
 
-const create_options_for_sender = ({ receiver, sender, subject, file, body }) => {
+const create_options_for_sender = ({ receiver, sender, subject, file, message, body }) => {
     const html = `
         <p> Wiadomość z formularza </p>
         <ul>
@@ -35,6 +35,7 @@ const create_options_for_sender = ({ receiver, sender, subject, file, body }) =>
         <p> Wysłałeś plik z wiadomością ${ message} </p>
         <p> Pozostała część wiadomości </p>
     `
+
     return {
         from: '"SUM Transfer" <sum.transfer@gmail.com>',
         text: body,
@@ -90,7 +91,7 @@ const send_to_receiver = (body) => new Promise((resolve, reject) => {
 
 const save_to_db = body => new Promise((resolve, reject) => {
     const myData = new baza_danych(body)
-    // const myData = new baza_danych(body)
+
     myData
         .save()
         .then(item => resolve('Zapisano prawidłowo do bazy'))
@@ -100,7 +101,7 @@ const save_to_db = body => new Promise((resolve, reject) => {
 
 
 module.exports = body => Promise.all([
-    send_to_receiver(transporter, body),
-    send_to_sender(transporter, body),
+    send_to_receiver(body),
+    send_to_sender(body),
     save_to_db(body),
 ])

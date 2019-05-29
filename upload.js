@@ -9,10 +9,9 @@ module.exports = ({ upfile }) => new Promise((resolve, reject) => {
         }
 
         const handleError = err => {
-            console.log('File Upload Failed', name, err)
+            console.log('File Upload Failed', upfile.name, err)
             reject('Error Occured!')
         }
-
         upfile.mv(uploadpath, err => err ? handleError(err) : handleSuccess())
     } else {
         reject('Nie wybrano pliku !')

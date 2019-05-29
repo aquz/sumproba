@@ -22,7 +22,10 @@ app.post('/send-email', (req, res) => new Promise((resolve, reject) => {
             handleEmail(req.body),
         ])
         .then(() => res.render('success'))
-        .catch(() => res.render('error'))
+        .catch(error => {
+            console.log(error)
+            res.render('error')
+        })
 }))
 
-app.listen(3010, port => console.log('Server Started at port ', port))
+app.listen(3010, console.log )
