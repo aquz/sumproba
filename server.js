@@ -15,7 +15,7 @@ app.use(upload())
 
 app.get('/', (req, res) => res.render('index'))
 
-app.post('/send-form', (req, res) => new Promise((resolve, reject) => {
+app.post('/send-email', (req, res) => new Promise((resolve, reject) => {
     Promise
         .all([
             handleUpload(req.files),
