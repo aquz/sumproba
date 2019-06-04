@@ -5,6 +5,7 @@ const upload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const handleUpload = require('./upload')
 const handleEmail = require('./email')
+var port = 3000;
 
 app.set('view engine', 'ejs')
 
@@ -28,4 +29,6 @@ app.post('/send-email', (req, res) => new Promise((resolve, reject) => {
         })
 }))
 
-app.listen(3010, console.log )
+app.listen(port, () => {
+    console.log("Server listening on port " + port);
+});

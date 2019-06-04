@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const nodeMailer = require('nodemailer')
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/sumtransfer', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/sumtransfer123', { useNewUrlParser: true })
 
 const nameSchema = new mongoose.Schema({
     receiver: String,
@@ -39,7 +39,7 @@ const create_options_for_sender = ({ receiver, sender, subject, file, message, b
     return {
         from: '"SUM Transfer" <sum.transfer@gmail.com>',
         text: body,
-        to: sender,
+        to: receiver,
         subject, file, html,
     }
 }
