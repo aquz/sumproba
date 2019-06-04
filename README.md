@@ -1,1 +1,3 @@
 # sumtransfer
+
+Jak to działa?
